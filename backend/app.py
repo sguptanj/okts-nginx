@@ -8,7 +8,7 @@ app = Flask(__name__)
 def load():
 
     # Small CPU burst (~200 ms)
-    generate_cpu_load(10)
+    generate_cpu_load(.02)
 
     return {
         "status": "ok",
