@@ -1,10 +1,7 @@
-FROM nginx:1.29-alpine
-
-RUN rm -f /etc/nginx/conf.d/default.conf
-
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY index.html /usr/share/nginx/html/index.html
-
+FROM node:22-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --omit=dev
+COPY . .
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]
