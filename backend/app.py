@@ -7,13 +7,22 @@ app = Flask(__name__)
 @app.route("/api/load")
 def load():
 
-    generate_cpu_load(0.8)
+    # Small CPU burst (~200 ms)
+    generate_cpu_load(0.2)
 
     return {
-        "status": "success",
+        "status": "ok",
         "timestamp": time.time()
     }
 
-@app.route("/api/health")
+@app.route("/health")
 def health():
-    return {"status": "UP"}
+    return "OK"
+
+if __name__ == "__main__":
+    app.run(
+        host="127.0.0.1",
+        port=5000,
+        threaded=False,
+        debug=False
+    )

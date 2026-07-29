@@ -1,26 +1,19 @@
-FROM python:3.12-slim
+FROM python:3.12-alpine
 
 WORKDIR /app
 
 # Install nginx
-RUN apt-get update && \
-    apt-get install -y nginx && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache nginx
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend
+# Copy application
 COPY backend/ /app/backend/
-
-# Copy frontend
 COPY frontend/ /usr/share/nginx/html/
+COPY nginx/default.conf /etc/nginx/http.d/default.conf
 
-# Copy nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-
-# Startup script
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 

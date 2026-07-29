@@ -1,10 +1,7 @@
 #!/bin/sh
 
 # Start Flask
-gunicorn \
-  --workers 2 \
-  --bind 127.0.0.1:5000 \
-  backend.app:app &
+python /app/backend/app.py &
 
 # Start nginx
 nginx -g "daemon off;"

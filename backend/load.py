@@ -8,14 +8,12 @@ def generate_cpu_load(seconds):
 
     while time.time() < end:
 
-        for i in range(2, 5000):
+        for i in range(2, 2000):
 
-            prime = True
+            limit = int(math.sqrt(i))
 
-            for j in range(2, int(math.sqrt(i)) + 1):
-
+            for j in range(2, limit + 1):
                 if i % j == 0:
-                    prime = False
                     break
 
-        hashlib.sha256(str(time.time()).encode()).hexdigest()
+        hashlib.sha256(str(time.time()).encode()).digest()
