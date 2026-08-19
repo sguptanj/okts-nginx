@@ -2,6 +2,11 @@ FROM python:3.12-alpine
 
 WORKDIR /app
 
+# Default environment variables
+ENV ENVIRONMENT=development
+ENV API_URL=http://localhost:8000
+ENV LOG_LEVEL=INFO
+
 # Install nginx
 RUN apk add --no-cache nginx
 
